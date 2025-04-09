@@ -7,13 +7,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="dbup" Version="5.0.41" />
-    <PackageReference Include="dbup-postgresql" Version="6.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="scripts/**/*.sql" />
-  </ItemGroup>
-
 </Project>

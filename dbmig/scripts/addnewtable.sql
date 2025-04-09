@@ -1,0 +1,1 @@
+create table sales.mytest (id int, name text);
