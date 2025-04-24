@@ -2,7 +2,13 @@
 using DbUp;
 using DbUp.Postgresql;
 
-var connectionString = "Host=localhost;Port=5432;Username=postgres;Password=Mcp334264!;Database=posette2025";
+var connectionString = $"Host={Environment.GetEnvironmentVariable("hostname")};" +
+                       $"Port=5432;" +
+                       $"Username={Environment.GetEnvironmentVariable("username")};" +
+                       $"Password={Environment.GetEnvironmentVariable("password")};" +
+                       $"Database={Environment.GetEnvironmentVariable("dbname")};";
+
+Console.WriteLine($"Connection string: {connectionString}");
 
 EnsureDatabase.For.PostgresqlDatabase(connectionString);
 

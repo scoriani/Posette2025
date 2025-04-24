@@ -5,8 +5,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPublishable>true</IsPublishable>
     <EnableSdkContainerSupport>true</EnableSdkContainerSupport>
-    <ContainerRepository>scoriani/webapp</ContainerRepository>
-    <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+    <ContainerBaseImage>mcr.microsoft.com/dotnet/runtime:9.0.0-azurelinux3.0-distroless-arm64v8</ContainerBaseImage>
+    <ContainerFamily>alpine</ContainerFamily>
+    <RuntimeIdentifier>linux-arm64</RuntimeIdentifier>
     <PublishAot>false</PublishAot>
     <StripSymbols>false</StripSymbols>
   </PropertyGroup>

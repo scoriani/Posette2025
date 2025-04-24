@@ -6,7 +6,7 @@ namespace webapp.Pages;
 public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
-    public string ServerName { get; private set; }
+    public string? ServerName { get; private set; }
 
 
     public IndexModel(ILogger<IndexModel> logger)
