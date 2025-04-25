@@ -7,23 +7,27 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<SalesContext>(options =>
-    options.UseNpgsql());
+    options.UseNpgsql().UseSeeding((context,_) =>
+    {
+        // read a sql script from file system in a string
+        var sql = File.ReadAllText("PopulateDatabase/populatedb.sql");
+        context.Database.ExecuteSqlRaw(sql);
+    }));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+using (var scope = app.Services.CreateScope())
 {
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    var applicationDbContext = scope.ServiceProvider.GetRequiredService<SalesContext>();
+    applicationDbContext.Database.EnsureDeleted();
+    applicationDbContext.Database.Migrate();
 }
 
 app.UseHttpsRedirection();
 
 app.UseRouting();
 
-app.UseAuthorization();
+//app.UseAuthorization();
 
 app.MapStaticAssets();
 app.MapRazorPages()

@@ -31,8 +31,6 @@ public partial class SalesContext : DbContext
 
     public virtual DbSet<Supplier> Suppliers { get; set; }
 
-    public virtual DbSet<Test> Tests { get; set; }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseNpgsql("Name=ConnectionString");
 
@@ -220,15 +218,6 @@ public partial class SalesContext : DbContext
             entity.Property(e => e.Suppliername)
                 .HasMaxLength(50)
                 .HasColumnName("suppliername");
-        });
-
-        modelBuilder.Entity<Test>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("test");
-
-            entity.Property(e => e.V1).HasColumnName("v1");
         });
 
         OnModelCreatingPartial(modelBuilder);
